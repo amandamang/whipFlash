@@ -1,0 +1,88 @@
+﻿@using Capstone.Web.Models;
+@model Capstone.Web.Models.ViewModels.CardViewModel
+
+<h2>Add New Card</h2>
+<div class="container">
+    @if (Model.UpdateErrors != null)
+    {
+        <div class="alert alert-warning text-center col-md-6 " style="padding-right:20px;" role="alert">
+            @foreach (string error in Model.UpdateErrors)
+            {
+                <p>@error</p>
+            }
+        </div>
+    }
+    @if (Model.UpdateSuccessMessage != null)
+    {
+        <div class="alert alert-success text-center col-md-6 " style="padding-right:20px;" role="alert">
+            @Model.UpdateSuccessMessage
+        </div>
+    }
+    @using (Html.BeginForm("NewCard", "Deck", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Term, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Term, new { @class = "form-control", @style = "width: 80%" })
+                    @Html.ValidationMessageFor(model => model.Term, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Definition, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Definition, new { @class = "form-control", @style = "width: 80%", @rows = 3 })
+                    @Html.ValidationMessageFor(model => model.Definition, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @for (int i = 0; i < 3; i++)
+                {
+                    @Html.Label("Add Tag", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TagNames[i], new { @class = "form-control", @style = "width: 80%" })
+                        @Html.ValidationMessageFor(model => model.TagNames[i], "", new { @class = "text-danger" })
+                    </div>
+                }
+            </div>
+            @if (Model.DeckId != null)
+            {
+                @Html.HiddenFor(model => model.DeckId, Model.DeckId);
+
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <p class="text-dark">Current Decks:</p>
+                    </div>
+                    <div class="col-md-8">
+                        @Model.DeckName
+                    </div>
+                </div>
+            }
+            <div class="form-group row">
+                <label class="control-label col-md-2" for="addDeckDropdown">Add to Deck</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="NewDeckId" style="width: 80%">
+                        <option value="null"></option>
+                        @foreach (KeyValuePair<int, string> item in Model.DeckIdName)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="DeckName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-2" for=""></label>
+                <div class="btn-group btn-group-sm col-md-10" role="group" aria-label="Cards">
+                    <button class="btn btn-outline-success formSubmitButton" role="button">Save</button>
+                    <a class="btn btn-dark btn-outline-secondary" href="javascript:void(0);" onclick="history.go(-1);" role="button">Undo Changes</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+    

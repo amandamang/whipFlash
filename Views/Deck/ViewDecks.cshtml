@@ -1,0 +1,46 @@
+﻿@using Capstone.Web.Models;
+@model Capstone.Web.Models.ViewModels.DecksViewModel
+
+<div class="container">
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-warning text-center col-md-6 " style="padding-right:20px;" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success text-center col-md-6 " style="padding-right:20px;" role="alert">
+            @Model.SuccessMessage
+        </div>
+    }
+    <h2>Your Decks</h2>
+    <hr />
+    <div class="row">
+        @foreach (DeckItem deck in Model.Decks)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 deck-padded">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@deck.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@deck.CardCount Cards</h6>
+                        <div class="btn-group btn-group-sm rt-bttns" role="group" aria-label="Basic example">
+                            <a class="btn btn-outline-success" href="~/Study/Index?deckId=@deck.Id" role="button">Study</a>
+                            <a class="btn btn-outline-secondary" href="~/Deck/DeckDetail?deckId=@deck.Id" role="button">Edit</a>
+                            @*<a class="btn btn-dark btn-outline-danger" href="~/Deck/Edit?deckId=@deck.Id" role="button">Delete</a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-4 col-md-6 col-sm-12 deck-padded">
+            <div class="card">
+                <div class="card-body add-new-card deck-padded">
+                    <h5 class="card-title deck-padded">Add Deck</h5><hr />
+                    <a class="btn btn-lg btn-outline-success add-new-card btn-padded" href="/Deck/NewDeck" role="button"> &nbsp; &nbsp; &nbsp; + &nbsp; &nbsp; &nbsp; </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model Capstone.Web.Models.ViewModels.StudyResultViewModel
+
+
+<script>
+    $(function () {
+        var bar = new ProgressBar.SemiCircle(container, {
+        strokeWidth: 6,
+        color: '#FFEA82',
+        trailColor: '#eee',
+        trailWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        svgStyle: null,
+        text: {
+            value: '',
+            alignToBottom: false
+        },
+        from: { color: '#FFEA82' },
+        to: { color: '#ED6A5A' },
+        // Set default step function for all animate calls
+        step: (state, bar) => {
+            bar.path.setAttribute('stroke', state.color);
+            var value = Math.round(bar.value() * 100);
+            if (value === 0) {
+                bar.setText('');
+            } else {
+                bar.setText(value);
+            }
+
+            bar.text.style.color = state.color;
+        }
+    });
+        bar.text.style.fontFamily = "Merriweather";
+    bar.text.style.fontSize = '2rem';
+
+        bar.animate(@Model.NumberCorrect / @Model.TotalCards);  // Number from 0.0 to 1.0
+});
+</script>
+
+    <div class="container text-center">
+        <div class="d-flex justify-content-center row p-3">
+            <div class="col-lg-8 col-md-10 col-12">
+
+                @if ((double)Model.NumberCorrect / (double)Model.TotalCards >= .7)
+                {
+                    <h1>Good job!</h1>
+                }
+                @if ((double)Model.NumberCorrect / (double)Model.TotalCards < .7)
+                {
+                    <h1>Keep trying!</h1>
+                }
+
+                @*<h1>Good Job!</h1>*@
+                <br />
+                <h2>DECK: @Model.DeckName</h2>
+                <div class="m-auto pt-3 pb-5">
+                    <div id="container" class="m-auto"></div>
+                </div>
+                @*<h2>SCORE: @Model.PercentScore</h2>*@
+                <h3>@Model.NumberCorrect correct out of @Model.TotalCards</h3>
+                <div>
+                    <a role="button" class="btn btn-success btn-lg" href="/Study/Index?deckId=@Model.">Play Again!</a>
+                    <a role="button" class="btn btn-secondary btn-lg" href="/Deck/ViewDecks">View Decks</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
