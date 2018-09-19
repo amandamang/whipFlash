@@ -1,0 +1,42 @@
+﻿@using Capstone.Web.Models;
+@model Capstone.Web.Models.ViewModels.EditViewModel  
+<!DOCTYPE html>
+<div class="container text-center">
+    <i class="fas fa-exclamation-triangle" style="color:orangered; height:250px; width:auto;"></i>
+    <p></p>
+    <h5>Are you sure you want to delete the card: "@Model.Term"?</h5>
+
+        <div class="btn-group" role="group">
+            <a class="btn btn-outline-success" href="javascript:void(0);" onclick="history.go(-1);" role="button">Keep</a>
+            @using (Html.BeginForm("Edit", "Deck", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.Term, Model.Term);
+                @Html.HiddenFor(model => model.CardId, Model.CardId);
+                @Html.HiddenFor(model => model.DeckId, Model.DeckId);
+                <button class="btn btn-outline-danger" role="button">Delete</button>
+            }
+        </div>
+</div>
+@*
+    MODAL CODE
+
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+
+</div>
+            to edit definition: Html.TextAreaFor
+
+            display definition in a "pre tag"
+
+*@
+

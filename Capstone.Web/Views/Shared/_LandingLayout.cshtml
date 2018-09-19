@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/Img/favicon-32x32.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>whipFlash</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="~/Content/styles.css">
+
+    <!-- Logo Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Satisfy|Sriracha|Vibur" rel="stylesheet">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <style>
+        container {
+            margin: auto;
+            min-width: 525px;
+        }
+    </style>
+
+</head>
+
+<body class="text-white" style="background-color:black; height:100vh; padding-top: 60px">
+    <div class="container-fluid">
+        <div class="logoHolder">
+            <div class="logoText">
+                <a href="/Home">
+                    <h1 id="whipText" style="font-family: 'Satisfy', cursive;">whip</h1>
+                    <h1 id="flashText" style="font-family: 'Fredericka the Great', cursive;">FLASH</h1>
+                </a>
+            </div>
+        </div>
+        <div id="renderBody">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿@model Capstone.Web.Models.ViewModels.StudyIndexViewModel
+
+
+<div class="container modal-content">
+    <div class="card add-new-card">
+        <div class="card-body add-new-card">
+            <h2>Take the @Model.StudyDeck.Deck.Name Quiz:</h2>
+            <p>@Model.StudyDeck.Deck.Description</p>
+
+            <div class="container">
+                <div class="progress">
+                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 100%">
+                        Ready!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container add-new-card">
+            <form action="/Study/StudyCard" method="get">
+                <div>
+                    <input type="hidden" name="deckId" value="@Model.StudyDeck.Deck.Id" />
+                </div>
+                <button class="btn btn-success" type="submit">Let's Go!</button>
+                <a class="btn btn-dark" href="javascript:void(0);" onclick="history.go(-1);" role="button">Exit Quiz</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

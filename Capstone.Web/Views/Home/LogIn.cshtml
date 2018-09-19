@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+
+@model Capstone.Web.Models.ViewModels.LoginViewModel
+
+
+<style>
+    input[type=password] {
+        border: 1.5px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+        width: 100%;
+        height: 30px;
+        padding-left: 8px;
+    }
+
+    input[type=text] {
+        border: 1.5px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+        width: 100%;
+        height: 30px;
+        padding-left: 8px;
+    }
+
+    ::placeholder {
+        color: darkgray;
+    }
+
+    .field-validation-error {
+        color: #C88281;
+    }
+
+    .star {
+        color: red;
+    }
+
+    .loginStuff {
+        margin: auto;
+        width: 300px;
+        padding: 2px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    /*body {
+        padding-bottom: 50px;
+    }*/
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        margin-top: 20px;
+    }
+</style>
+
+    
+<div class="loginStuff">
+    @if (Model.LoginError != null)
+    {
+
+        if (Model.LoginError == "User does not exist")
+        {
+            <div class="invalidInputError alert alert-warning text-center" style="padding-right:20px;" role="alert">
+                Invalid Username or Password<br />
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center" style="padding-right:20px;" role="alert">
+                @Model.LoginError
+            </div>
+        }
+    }
+
+    @if (TempData["Success"] != null)
+    {
+            <div class="successMessage alert alert-success text-center" style="padding-right:20px;" role="alert">
+                Success! You have created an account<br />
+            </div>
+    }
+
+    @using (Html.BeginForm("LogIn", "Home", FormMethod.Post))
+    {
+        <div class="formValidationGroup">
+            @Html.LabelFor(m => m.UserName, "Username")
+            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { placeholder = "" } })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <br />
+        <div class="formValidationGroup">
+            @Html.LabelFor(m => m.Password)
+            @Html.EditorFor(m => m.Password, new { htmlAttributes = new { placeholder = "" } })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <br />
+
+        <button class="formSubmitButton loginButton">Login</button>
+    }
+</div>
+<div id="newUserLink">
+    <a class="text-center" href="/Home/Register" >New around here? Sign up</a>
+</div>
+@*<div class="deltaTE">
+    <a href="Home/About">
+        <div class="homeDelta">
+            <img src="~/Content/Img/Delta_Thumbnail_NoBackground.png" />
+        </div>
+        <div class="aboutDeltaText">
+            <p>About DeltaTE</p>
+        </div>
+    </a>
+</div>*@

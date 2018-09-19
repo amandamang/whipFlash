@@ -1,0 +1,60 @@
+﻿@using Capstone.Web.Models;
+@model Capstone.Web.Models.ViewModels.DeckDetailViewModel
+<!DOCTYPE html>
+
+<div class="container">
+    @if (Model.UpdateSuccessMessage != null)
+    {
+    <div class="alert alert-success text-center col-md-6 " style="padding-right:20px;" role="alert">
+        @Model.UpdateSuccessMessage
+    </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="d-inline">@Model.Deck.Name </h2>
+            <a class="btn btn-info add-new-card btn-padded float-md-right" href="/Deck/UpdateDeck?deckId=@Model.Deck.Id" role="button">Edit Deck Info</a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        @foreach (CardItem card in Model.Deck.Cards)
+        {
+            <div class="col-lg-6 col-md-12 deck-padded">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@card.Term</h5>
+                        <hr />
+                        <pre style="white-space: pre-wrap;" class="mb-2">@card.Definition</pre>
+                        <h2> </h2>
+                        <hr />
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-8" style="padding-left:0px;">
+                                    <h5>
+                                        @foreach (TagItem tag in card.Tags)
+                                        {
+                                            <span class="badge badge-info">@tag.TagName</span>
+                                        }
+                                    </h5>
+                                </div>
+                                <div class="btn-group btn-group-sm rt-bttns col-4" role="group" aria-label="Cards">
+                                    <a class="btn btn-outline-secondary" href="~/Deck/UpdateCard?cardId=@card.Id&deckId=@Model.Deck.Id" role="button">Edit</a>
+                                    <a class="btn btn-dark btn-outline-danger" href="~/Deck/Edit?cardId=@card.Id&deckId=@Model.Deck.Id" role="button">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-6 col-md-6 col-sm-12 deck-padded">
+            <div class="card">
+                <div class="card-body add-new-card deck-padded">
+                    <h5 class="card-title deck-padded">Add Card</h5><hr />
+                    <a class="btn btn-lg btn-outline-success add-new-card btn-padded" href="/Deck/NewCard?deckId=@Model.Deck.Id" role="button"> &nbsp; &nbsp; &nbsp; + &nbsp; &nbsp; &nbsp; </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

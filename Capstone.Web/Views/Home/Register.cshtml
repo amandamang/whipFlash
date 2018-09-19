@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+
+@model Capstone.Web.Models.ViewModels.RegistrationViewModel
+
+<style>
+    input[type=password] {
+        border: 1.5px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+        /*width: 100%;*/
+        height: 30px;
+        /*padding-left: 8px;*/
+    }
+
+    input[type=email] {
+        border: 1.5px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+        /*width: 100%;*/
+        height: 30px;
+        padding-left: 8px;
+    }
+
+    input[type=text] {
+        border: 1.5px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+        /*width: 100%;*/
+        height: 30px;
+        padding-left: 8px;
+    }
+
+    button {
+        color: black;
+        background-color: antiquewhite;
+        border: solid;
+        border-color: antiquewhite;
+        border-radius: 4px;
+        width: 70px;
+        height: 30px;
+        width: 30%;
+        margin-left: 35%;
+        margin-right: 35%
+    }
+
+
+    .star {
+        color: red;
+    }
+
+    .loginStuff {
+
+        margin: auto;
+        /*width: 300px;*/
+        width:70%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+        margin-top: 50px;
+    }
+
+    p {
+        font-family: 'Merriweather', serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: #999;
+    }
+
+
+</style>
+
+<div class="loginStuff">
+    <div class="row justify-content-md-center">
+
+        @if (Model.RegistrationError != null)
+        {
+            <div class="invalidInputError alert alert-warning text-center col-md-6 " style="padding-right:20px;" role="alert">
+                Username already exists... Choose another Username or <br /><a href="/home/login" class="alert-link">Click here to login</a>
+            </div>
+
+        }
+
+        <form class="formvalidationgroup" action="/Home/Register" method="post" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label>First name</label>
+                    <input type="text" name="FirstName" class="form-control" placeholder="Ann" value="" required>
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Last name</label>
+                    <input type="text" name="LastName" class="form-control" placeholder="Onymous" value="" required>
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Username</label>
+                    <input type="text" name="Username" class="form-control" placeholder="whipFlash" value="" required>
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Email</label>
+                    <input type="email" name="Email" class="form-control" placeholder="whip@flash.com" required>
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Password</label>
+                    <input type="password" name="Password" class="form-control" placeholder="**********" required>
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Confirm password</label>
+                    <input type="password" name="ConfirmPassword" class="form-control" placeholder="**********" required>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+            </div>
+            </ br>
+            <button class="btn btn-primary registerButton" type="submit">Sign Up!</button>
+        </form>
+    </div>
+</div>
